@@ -8,3 +8,5 @@ contributes:
       width: 1600
       height: 900
       theme: [custom.scss]
+      format-resources:
+        - assets
