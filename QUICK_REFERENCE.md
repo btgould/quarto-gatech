@@ -20,9 +20,9 @@ date-format: "MMMM D, YYYY"
 ## Slide Structure
 
 ```markdown
-## Section Title              # Level 2 = Section slide (with section background)
+# Section Title              # Level 1 = Section slide (with section background)
 
-### Slide Title              # Level 3 = Content slide (with regular background)
+## Slide Title              # Level 2 = Content slide (with regular background)
 
 Content goes here
 ```
@@ -283,15 +283,15 @@ format:
     incremental: false
 ---
 
-## Introduction {.section}
+# Introduction {.section}
 
-### Research Question
+## Research Question
 
 ::: {.hl-purple}
 What is the impact of X on Y?
 :::
 
-### Methodology
+## Methodology
 
 ::: {.columns}
 :::: {.column width="50%"}
@@ -303,9 +303,9 @@ What is the impact of X on Y?
 ::::
 :::
 
-## Results {.section}
+# Results {.section}
 
-### Key Findings
+## Key Findings
 
 ::: {.fragment .hl-blue}
 Finding 1: Significant correlation
@@ -320,9 +320,9 @@ Finding 2: Positive trend
 This changes everything!
 :::
 
-## Conclusion {.section}
+# Conclusion {.section}
 
-### Summary
+## Summary
 
 ::: {.fragment}
 - Major contribution 1
@@ -346,4 +346,4 @@ This changes everything!
 | Fragments not working   | Ensure `.fragment` class is used correctly              |
 | PDF export issues       | Use `quarto render file.qmd --to pdf`                   |
 
-For detailed documentation, see [THEME_DOCUMENTATION.md](THEME_DOCUMENTATION.md)
+For detailed documentation, see [THEME_DOCUMENTATION.md](_extensions/gatech/THEME_DOCUMENTATION.md)

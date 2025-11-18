@@ -44,11 +44,11 @@ date: last-modified
 date-format: "MMMM D, YYYY"
 ---
 
-## Introduction
+# Introduction
 
 This is a section slide.
 
-### Content Slide
+## Content Slide
 
 - Bullet point 1
 - Bullet point 2
@@ -57,7 +57,7 @@ This is a section slide.
 Highlighted text with Georgia Tech purple
 :::
 
-### Another Slide
+## Another Slide
 
 ::: {.callout-tip}
 ## Pro Tip
@@ -82,8 +82,8 @@ quarto preview my-presentation.qmd
 ### Slide Structure
 
 - **Title slide**: Automatically generated from YAML frontmatter
-- **Section slides**: Use level 2 headers (`## Section Name`)
-- **Content slides**: Use level 3 headers (`### Slide Title`)
+- **Section slides**: Use level 1 headers (`# Section Name`)
+- **Content slides**: Use level 2 headers (`## Slide Title`)
 
 ### Custom Classes
 
@@ -157,7 +157,7 @@ All theme customization is in `_extensions/gatech/custom.scss`:
 - **Typography**: Change `$font-family-sans-serif` variable
 - **Spacing**: Adjust `$padding-default`, `$margin-default`, `$br-default`
 
-See [THEME_DOCUMENTATION.md](THEME_DOCUMENTATION.md) for comprehensive customization guide.
+See [THEME_DOCUMENTATION.md](_extensions/gatech/THEME_DOCUMENTATION.md) for comprehensive customization guide.
 
 ## Background Images
 
@@ -199,7 +199,7 @@ For complete documentation on how the theme works, including:
 - Advanced usage examples
 - Troubleshooting
 
-See **[THEME_DOCUMENTATION.md](THEME_DOCUMENTATION.md)**
+See **[THEME_DOCUMENTATION.md](_extensions/gatech/THEME_DOCUMENTATION.md)**
 
 ## Example
 
