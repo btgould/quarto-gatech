@@ -1,10 +1,11 @@
 ---
-title: Untitled
-format:
-  gatech-revealjs: default
-author: Brendan Gould
+title: "GaTech Quarto RevealJS Template"
+author: "Your Name"
 date: last-modified
+institute: Georgia Institute of Technology
 ---
+
+# Section 1
 
 ## Introduction
 
