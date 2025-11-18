@@ -211,4 +211,4 @@ See [template.qmd](template.qmd) for a basic example presentation.
 
 ## Credits
 
-Created by Brendan Gould
+Created by Brendan Gould and Evanns Morales

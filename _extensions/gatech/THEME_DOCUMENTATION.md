@@ -40,7 +40,7 @@ Quarto uses an **extension system** to allow custom formats. This theme is packa
 1. **Extension Registration** (`_extension.yml`):
    ```yaml
    title: Gatech
-   author: Brendan Gould
+   author: Brendan Gould and Evanns Morales
    version: 1.0.0
    quarto-required: ">=1.7.0"
    contributes:
@@ -298,13 +298,13 @@ The theme uses three different background images depending on slide type.
 
 ### Image Files (`_extensions/gatech/assets/`)
 
-| File | Size | Usage |
-|------|------|-------|
-| `background_title.png` | 204 KB | Opening title slide |
-| `background_slide.png` | 28 KB | Regular content slides |
-| `background_section_blank.jpg` | 41 KB | Section divider slides |
+| File                              | Size   | Usage                  |
+| --------------------------------- | ------ | ---------------------- |
+| `background_title.png`            | 204 KB | Opening title slide    |
+| `background_slide.png`            | 28 KB  | Regular content slides |
+| `background_section_blank.jpg`    | 41 KB  | Section divider slides |
 | `background_section_building.jpg` | 113 KB | Alternative section bg |
-| `background_section_car.jpg` | 113 KB | Alternative section bg |
+| `background_section_car.jpg`      | 113 KB | Alternative section bg |
 | `background_section_students.jpg` | 121 KB | Alternative section bg |
 
 ### Background Rules (Lines 77-105)
@@ -805,13 +805,13 @@ assets/                  # Copied background images
 
 ### Key File Locations
 
-| File | Purpose | Edit? |
-|------|---------|-------|
-| `_extensions/gatech/_extension.yml` | Extension config | Rarely |
-| `_extensions/gatech/custom.scss` | **Theme source** | **YES** |
-| `_extensions/gatech/assets/*.png` | Background images | Replace as needed |
-| `template.qmd` | Example presentation | Create your own |
-| `template_files/libs/revealjs/dist/theme/*.css` | Compiled output | Never (auto-generated) |
+| File                                            | Purpose              | Edit?                  |
+| ----------------------------------------------- | -------------------- | ---------------------- |
+| `_extensions/gatech/_extension.yml`             | Extension config     | Rarely                 |
+| `_extensions/gatech/custom.scss`                | **Theme source**     | **YES**                |
+| `_extensions/gatech/assets/*.png`               | Background images    | Replace as needed      |
+| `template.qmd`                                  | Example presentation | Create your own        |
+| `template_files/libs/revealjs/dist/theme/*.css` | Compiled output      | Never (auto-generated) |
 
 ---
 
