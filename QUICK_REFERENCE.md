@@ -4,12 +4,16 @@
 
 ```yaml
 ---
-title: "Presentation Title"
+title: "My Presentation"
 subtitle: "Optional Subtitle"
-author: "Your Name"
-date: "2025-11-18"
-format:
-  gatech-revealjs: default
+author:
+    - name: Author Name
+    affiliation: 
+      - Your Affiliation
+    email: your.email@example.com
+
+date: last-modified
+date-format: "MMMM D, YYYY"
 ---
 ```
 
@@ -213,18 +217,18 @@ def goodbye():
 
 ## Color Palette Quick Reference
 
-| Color Name | Hex Code | Usage |
-|------------|----------|-------|
-| Navy Blue | `#003057` | Primary brand, body text |
-| Tech Gold | `#b3a369` | Primary accent |
-| Buzz Gold | `#eaaa00` | Bright accent |
-| Gray Matter | `#54585a` | Secondary text |
-| Bright Purple | `#7800ff` | `.hl-purple` |
-| Bright Blue | `#2961ff` | `.hl-blue` |
-| Bright Electric | `#00ffff` | `.hl-electric` |
-| Bright Canopy | `#00ec9c` | `.hl-canopy` |
-| Bright Buzz | `#ffcc00` | `.hl-buzz` |
-| Bright Horizon | `#ff640f` | `.hl-horizon` |
+| Color Name      | Hex Code  | Usage                    |
+| --------------- | --------- | ------------------------ |
+| Navy Blue       | `#003057` | Primary brand, body text |
+| Tech Gold       | `#b3a369` | Primary accent           |
+| Buzz Gold       | `#eaaa00` | Bright accent            |
+| Gray Matter     | `#54585a` | Secondary text           |
+| Bright Purple   | `#7800ff` | `.hl-purple`             |
+| Bright Blue     | `#2961ff` | `.hl-blue`               |
+| Bright Electric | `#00ffff` | `.hl-electric`           |
+| Bright Canopy   | `#00ec9c` | `.hl-canopy`             |
+| Bright Buzz     | `#ffcc00` | `.hl-buzz`               |
+| Bright Horizon  | `#ff640f` | `.hl-horizon`            |
 
 ## Rendering Commands
 
@@ -244,26 +248,26 @@ quarto render presentation.qmd --to pptx
 
 ## Keyboard Shortcuts (During Presentation)
 
-| Key | Action |
-|-----|--------|
-| `f` | Fullscreen |
-| `s` | Speaker notes view |
-| `o` | Overview mode |
-| `b` | Pause (black screen) |
-| `?` | Show keyboard shortcuts |
-| `Esc` | Exit fullscreen/overview |
-| Arrow keys | Navigate slides |
-| Space | Next slide |
+| Key        | Action                   |
+| ---------- | ------------------------ |
+| `f`        | Fullscreen               |
+| `s`        | Speaker notes view       |
+| `o`        | Overview mode            |
+| `b`        | Pause (black screen)     |
+| `?`        | Show keyboard shortcuts  |
+| `Esc`      | Exit fullscreen/overview |
+| Arrow keys | Navigate slides          |
+| Space      | Next slide               |
 
 ## File Locations for Customization
 
-| What to Change | File Location |
-|----------------|---------------|
-| Colors | `_extensions/gatech/custom.scss` (lines 3-67) |
-| Backgrounds | `_extensions/gatech/assets/` |
+| What to Change   | File Location                                   |
+| ---------------- | ----------------------------------------------- |
+| Colors           | `_extensions/gatech/custom.scss` (lines 3-67)   |
+| Backgrounds      | `_extensions/gatech/assets/`                    |
 | Background paths | `_extensions/gatech/custom.scss` (lines 77-105) |
-| Typography | `_extensions/gatech/custom.scss` (line 59) |
-| Spacing defaults | `_extensions/gatech/custom.scss` (lines 70-73) |
+| Typography       | `_extensions/gatech/custom.scss` (line 59)      |
+| Spacing defaults | `_extensions/gatech/custom.scss` (lines 70-73)  |
 
 ## Example Presentation Structure
 
@@ -335,11 +339,11 @@ This changes everything!
 
 ## Troubleshooting
 
-| Issue | Solution |
-|-------|----------|
+| Issue                   | Solution                                                |
+| ----------------------- | ------------------------------------------------------- |
 | Backgrounds not showing | Check paths in `custom.scss`, ensure files in `assets/` |
-| Colors not applying | Re-render with `quarto render --no-cache` |
-| Fragments not working | Ensure `.fragment` class is used correctly |
-| PDF export issues | Use `quarto render file.qmd --to pdf` |
+| Colors not applying     | Re-render with `quarto render --no-cache`               |
+| Fragments not working   | Ensure `.fragment` class is used correctly              |
+| PDF export issues       | Use `quarto render file.qmd --to pdf`                   |
 
 For detailed documentation, see [THEME_DOCUMENTATION.md](THEME_DOCUMENTATION.md)
