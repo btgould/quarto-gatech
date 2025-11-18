@@ -2,8 +2,10 @@ project:
   output-dir: _output
   resources:
     - assets
+format: gatech-revealjs
+# engine: jupyter
 
 toc: true
-number-sections: true
+slide-number: c/t
+number-sections: false
 bibliography: references.bib
-format: gatech-revealjs
