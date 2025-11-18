@@ -32,10 +32,19 @@ cd quarto-gatech
 
 ```yaml
 ---
-title: "My Presentation"
-subtitle: "Optional Subtitle"
-author: "Your Name"
-date: "2025-11-18"
+title: |
+   | Title Line 1
+   | Title Line 2
+subtitle: "An Example Quarto RevealJS Presentation"
+
+author:
+  - name: YOUR NAME HERE
+    affiliation:
+      - YOUR AFFILIATION HERE
+    email: your.email@domain.com
+
+date: last-modified
+date-format: "MMMM D, YYYY"
 format:
   gatech-revealjs: default
 ---
@@ -59,6 +68,8 @@ Highlighted text with Georgia Tech purple
 ## Pro Tip
 Use fragments for progressive reveal!
 :::
+
+## References
 ```
 
 2. Render your presentation:
