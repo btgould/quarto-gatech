@@ -14,6 +14,10 @@ date: last-modified
 date-format: "MMMM D, YYYY"
 ---
 
+
+# Introduction
+This is a section slide.
+
 ## Title Slide
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
 
