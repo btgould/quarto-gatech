@@ -12,15 +12,9 @@ A professional Quarto extension providing Georgia Tech-branded styling for Revea
 - 1600x900 widescreen presentation format
 - Roboto typography for clean, modern appearance
 
-## Installing
+## To Use:
 
-### Option 1: Use as a Quarto template
-```bash
-quarto use template evannsm/quarto-gatech-slides
-```
-
-or
-
+### Option 1: Use as a Quarto template locally
 ```bash
 quarto use template evannsm/quarto-gatech-slides
 ```
