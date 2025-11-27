@@ -3,9 +3,9 @@ project:
   resources:
     - assets
 format: gatech-revealjs
-# engine: jupyter
+engine: jupyter
 
-toc: true
+# toc: true
 slide-number: c/t
-number-sections: false
+# number-sections: false
 bibliography: references.bib
