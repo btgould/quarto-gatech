@@ -5,7 +5,7 @@ project:
 format: gatech-revealjs
 engine: jupyter
 
-# toc: true
+toc: true
 slide-number: c/t
 # number-sections: false
 bibliography: references.bib

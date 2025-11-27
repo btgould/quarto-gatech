@@ -10,8 +10,9 @@
 7. [Custom Classes and Components](#custom-classes-and-components)
 8. [Callout Styling](#callout-styling)
 9. [Using the Theme](#using-the-theme)
-10. [Customization Guide](#customization-guide)
-11. [File Structure Reference](#file-structure-reference)
+10. [Skip-Section Feature](#skip-section-feature)
+11. [Customization Guide](#customization-guide)
+12. [File Structure Reference](#file-structure-reference)
 
 ---
 
@@ -25,6 +26,7 @@ This is a **Quarto extension** that provides Georgia Tech-branded styling for Re
 - Custom highlight classes with animation support
 - Standardized callout styling
 - Flexible layout utilities
+- Skip-section feature for TOC organization without presentation interruption
 - 1600x900 presentation dimensions optimized for widescreen displays
 
 ---
@@ -658,12 +660,14 @@ Quarto automatically:
 - Created from YAML frontmatter
 - Uses `background_title.png`
 
-**Section Slides (level 2 headers):**
+**Section Markers (level 2 headers):**
 ```markdown
 ## Section Name
 ```
-- Uses `background_section_blank.jpg`
-- Acts as dividers between sections
+- Appear in the table of contents for organization
+- **Automatically skipped** during presentation (see [Skip-Section Feature](#skip-section-feature))
+- Won't slow down your presentation with extra slides
+- Help structure your presentation logically
 
 **Content Slides (level 3 headers):**
 ```markdown
@@ -671,6 +675,160 @@ Quarto automatically:
 ```
 - Uses `background_slide.png`
 - Regular presentation content
+- These are the actual slides your audience will see
+
+---
+
+## Skip-Section Feature
+
+The theme includes an innovative **skip-section** feature that allows you to organize your presentation with section markers that appear in the table of contents (TOC) but are automatically skipped during the actual presentation. This helps keep your presentation flowing smoothly without interruption, while still maintaining clear organization in the navigation sidebar.
+
+### How It Works
+
+The skip-section feature is implemented through `skip-section.html` (referenced in `_extension.yml` via `include-after-body`), which uses both CSS and JavaScript:
+
+**1. CSS Hiding (Lines 1-6):**
+```css
+.reveal .slides section.level1 {
+  display: none !important;
+}
+```
+- Hides all level 1 section slides from visual display
+- These slides won't appear during presentation mode
+- Uses `!important` to ensure the rule isn't overridden
+
+**2. JavaScript Navigation Skip (Lines 8-26):**
+```javascript
+Reveal.on('slidechanged', event => {
+  if (event.currentSlide.classList.contains('level1')) {
+    var indices = Reveal.getIndices();
+    var prevIndices = Reveal.getIndices(event.previousSlide);
+
+    if (indices.h > prevIndices.h || indices.v > prevIndices.v) {
+      Reveal.next();  // Moving forward
+    } else {
+      Reveal.prev();  // Moving backward
+    }
+  }
+});
+```
+- Listens for slide change events
+- Detects when navigation lands on a level 1 section slide
+- Automatically skips to the next (or previous) slide based on direction
+- Ensures seamless navigation without visible interruption
+
+### Why Use This Feature?
+
+**Benefits:**
+- **Clean TOC Organization**: Section markers appear in the sidebar for easy navigation
+- **Faster Presentations**: No need to click through organizational divider slides
+- **Better Flow**: Presentations move directly from content to content
+- **Flexible Structure**: You can organize presentations hierarchically without UI overhead
+
+**Use Cases:**
+- Long presentations with multiple logical sections
+- Teaching materials where TOC organization is important for students
+- Conference talks where you want quick navigation but smooth delivery
+- Any presentation where you need structure without interruption
+
+### Usage Example
+
+```markdown
+---
+title: "My Presentation"
+format:
+  gatech-revealjs: default
+---
+
+## Introduction
+<!-- This appears in TOC but won't be shown as a slide -->
+
+### Welcome Slide
+This is the first actual slide shown.
+
+### Background
+More content here.
+
+## Main Content
+<!-- Another TOC marker that's automatically skipped -->
+
+### First Topic
+Content appears immediately.
+
+### Second Topic
+More content.
+
+## Conclusion
+<!-- Final TOC marker - skipped during presentation -->
+
+### Summary
+Your summary slide.
+
+### Thank You
+Final slide.
+```
+
+**What the audience sees:**
+1. Welcome Slide
+2. Background
+3. First Topic
+4. Second Topic
+5. Summary
+6. Thank You
+
+**What appears in the TOC:**
+- Introduction
+  - Welcome Slide
+  - Background
+- Main Content
+  - First Topic
+  - Second Topic
+- Conclusion
+  - Summary
+  - Thank You
+
+### Technical Details
+
+**File Reference:** `_extensions/gatech/skip-section.html`
+
+**Extension Configuration:**
+The feature is enabled in `_extension.yml`:
+```yaml
+contributes:
+  formats:
+    revealjs:
+      include-after-body: skip-section.html
+```
+
+**Markdown Hierarchy:**
+- `#` - Not used in RevealJS presentations (reserved for document title)
+- `##` - Level 1 headers → **Skipped section markers** (appear in TOC only)
+- `###` - Level 2 headers → **Actual presentation slides**
+- `####` - Level 3 headers → Sub-headings within slides
+
+**Behavior Notes:**
+- Skipped slides are completely invisible to the audience
+- Navigation (arrow keys, clicking TOC) works seamlessly
+- The feature works in both presentation and overview modes
+- PDF exports will not include the skipped section slides
+- Fragment navigation is unaffected
+
+### Disabling the Feature
+
+If you want section slides to appear normally (without skipping), you can:
+
+**Option 1: Remove the include in a specific document**
+```yaml
+format:
+  gatech-revealjs:
+    include-after-body: []  # Override to empty
+```
+
+**Option 2: Modify the extension**
+Edit `_extensions/gatech/_extension.yml` and remove:
+```yaml
+include-after-body: skip-section.html
+```
 
 ---
 
