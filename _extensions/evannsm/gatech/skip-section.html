@@ -1,0 +1,26 @@
+<style>
+  /* Hide level 1 section slides from presentation while keeping them in TOC */
+  .reveal .slides section.level1 {
+    display: none !important;
+  }
+</style>
+
+<script>
+  // Skip level 1 section slides during navigation
+  Reveal.on('slidechanged', event => {
+    // Check if we landed on a level 1 section slide
+    if (event.currentSlide.classList.contains('level1')) {
+      var indices = Reveal.getIndices();
+      var prevIndices = Reveal.getIndices(event.previousSlide);
+
+      // Determine navigation direction and skip
+      if (indices.h > prevIndices.h || indices.v > prevIndices.v) {
+        // Moving forward
+        Reveal.next();
+      } else {
+        // Moving backward
+        Reveal.prev();
+      }
+    }
+  });
+</script>
