@@ -3,7 +3,7 @@ project:
   resources:
     - assets
 format: gatech-revealjs
-engine: jupyter
+# engine: jupyter
 
 toc: true
 slide-number: c/t
