@@ -8,6 +8,6 @@ contributes:
       width: 1600
       height: 900
       theme: [custom.scss]
-      include-after-body: skip-section.html
+      # include-after-body: assets/skip-section.html
       format-resources:
         - assets
