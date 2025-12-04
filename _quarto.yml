@@ -7,6 +7,5 @@ format: gatech-revealjs
 
 toc: true
 slide-number: c/t
-# number-sections: false
-bibliography: references.bib
 include-after-body: _extensions/gatech/assets/skip-section.html
+# number-sections: false

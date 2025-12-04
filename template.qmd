@@ -12,12 +12,17 @@ author:
 
 date: last-modified
 date-format: "MMMM D, YYYY"
+bibliography: references.bib
+csl: _extensions/gatech/assets/ieee.csl
 ---
 
 
 # Section 1
 ## One
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. @10684122
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. [@10684122]
+
+
+
 
 ## Two
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
