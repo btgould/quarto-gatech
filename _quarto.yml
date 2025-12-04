@@ -1,0 +1,11 @@
+project:
+  output-dir: _output
+  resources:
+    - assets
+format: gatech-revealjs
+# engine: jupyter
+
+toc: true
+slide-number: c/t
+include-after-body: _extensions/gatech/assets/skip-section.html
+# number-sections: false

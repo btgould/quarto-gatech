@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+  <info>
+    <title>IEEE Compact (for slides)</title>
+    <id>http://www.zotero.org/styles/ieee-compact</id>
+    <link href="http://www.zotero.org/styles/ieee" rel="self"/>
+    <category citation-format="numeric"/>
+    <category field="engineering"/>
+    <summary>Compact IEEE style for presentation slides - shows only Author, Title, Journal abbreviation, Year</summary>
+    <updated>2025-12-04T00:00:00+00:00</updated>
+  </info>
+
+  <!-- Citation format: [1], [2], etc. -->
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout prefix="[" suffix="]" delimiter=", ">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+
+  <!-- Bibliography format -->
+  <bibliography entry-spacing="0" second-field-align="flush">
+    <layout suffix=".">
+      <!-- Number [1] -->
+      <text variable="citation-number" prefix="[" suffix="]"/>
+
+      <!-- Authors with abbreviated first names -->
+      <text macro="author" suffix=", "/>
+
+      <!-- Title in quotes -->
+      <text macro="title" suffix=", "/>
+
+      <!-- Journal/Publication (abbreviated if available) -->
+      <choose>
+        <if type="article-journal">
+          <choose>
+            <if variable="container-title-short">
+              <text variable="container-title-short" font-style="italic" suffix=", "/>
+            </if>
+            <else>
+              <text variable="container-title" font-style="italic" form="short" suffix=", "/>
+            </else>
+          </choose>
+        </if>
+        <else-if type="paper-conference">
+          <text variable="container-title" font-style="italic" form="short" suffix=", "/>
+        </else-if>
+        <else>
+          <text variable="container-title" font-style="italic" suffix=", "/>
+        </else>
+      </choose>
+
+      <!-- Year -->
+      <date variable="issued">
+        <date-part name="year"/>
+      </date>
+    </layout>
+  </bibliography>
+
+  <!-- Macros -->
+  <macro name="author">
+    <names variable="author">
+      <name initialize-with=". " delimiter=", " and="text" delimiter-precedes-last="never"/>
+      <substitute>
+        <names variable="editor"/>
+        <names variable="translator"/>
+      </substitute>
+    </names>
+  </macro>
+
+  <macro name="title">
+    <choose>
+      <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+        <text variable="title" font-style="italic"/>
+      </if>
+      <else>
+        <text variable="title" quotes="true"/>
+      </else>
+    </choose>
+  </macro>
+</style>
