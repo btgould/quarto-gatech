@@ -202,7 +202,7 @@ $opacity-default: 0.5;
 
   .csl-left-margin {
     display: inline; // Flow inline with reference text
-    margin-right: 4px; // Small space between [1] and reference text
+    margin-right: -25%; // Minimal space between [1] and reference text
   }
 
   .csl-right-inline {

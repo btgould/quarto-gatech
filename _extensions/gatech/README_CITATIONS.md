@@ -27,16 +27,60 @@ This is interesting [see @smith2020].
 
 The reference appears automatically at the slide bottom.
 
+## Citation Format
+
+The template uses **IEEE Compact** style (`ieee-compact.csl`), which shows:
+- Authors with abbreviated first names (e.g., `M. S. Branicky`)
+- Title in quotes
+- Journal abbreviation (if provided in `.bib` file)
+- Year only (no volume, issue, or pages)
+
+**Example output:** `M. S. Branicky, "Multiple Lyapunov functions...," IEEE TAC, 1998.`
+
+### Switching to Full IEEE Format
+
+To use the complete IEEE style with all details, change in your `.qmd` header:
+```yaml
+csl: _extensions/gatech/assets/ieee.csl  # Full IEEE format with volume, pages, etc.
+```
+
+### Adding Journal Abbreviations
+
+To get short journal names like "IEEE TAC" instead of full names, add `shortjournal` to your `.bib` entries:
+
+```bibtex
+@ARTICLE{example,
+  journal={IEEE Transactions on Automatic Control},
+  shortjournal={IEEE TAC},  ← Add this
+  ...
+}
+```
+
+**Common IEEE abbreviations:**
+- `IEEE TAC` - IEEE Transactions on Automatic Control
+- `IEEE T-RO` - IEEE Transactions on Robotics
+- `IEEE T-IV` - IEEE Transactions on Intelligent Vehicles
+
 ## Files Involved
 
 | File | Purpose | Edit When You Want To... |
 |------|---------|--------------------------|
 | `assets/slide-refs.js` | Finds citations and adds references | Change which slides get references or debugging |
-| `custom.scss` (lines 139-222) | Styles the references and footnotes | Change position, size, colors, or appearance |
+| `custom.scss` (lines 139-225) | Styles the references and footnotes | Change position, size, spacing, colors, or appearance |
+| `ieee-compact.csl` | Compact citation format | Reference - creates short format (Author, Title, Journal abbr, Year) |
 | `_extension.yml` (lines 11-13) | Enables the feature | Disable the feature entirely |
 | `SLIDE_REFERENCES_FEATURE.md` | Full documentation | Learn how it works in detail |
 
 ## Common Customizations
+
+### Reduce Space Between [X] and Reference Text
+
+In `custom.scss`, line 205:
+
+```scss
+margin-right: 1px;  // Even tighter (default is 2px)
+margin-right: 0px;  // No space at all
+```
 
 ### Make References Smaller
 

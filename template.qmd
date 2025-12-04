@@ -1,7 +1,6 @@
 ---
-title: |
-   | Hello world
-   | Hello world even more
+title: "Hello world<br>Hello world even more"
+
 subtitle: "An Example Quarto RevealJS Presentation"
 
 author:
@@ -13,7 +12,7 @@ author:
 date: last-modified
 date-format: "MMMM D, YYYY"
 bibliography: references.bib
-csl: _extensions/gatech/assets/ieee.csl
+csl: _extensions/gatech/assets/ieee-compact.csl
 ---
 
 
