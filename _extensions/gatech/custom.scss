@@ -25,8 +25,7 @@ $canopy-lime: #a4d233 !default;
 $rat-cap: #ffcd00 !default;
 $new-horizon: #e04f39 !default;
 
-$tertiaries : (
-  "purple": $impact-purple,
+$tertiaries : ("purple": $impact-purple,
   "blue": $bold-blue,
   "teal": $olympic-teal,
   "electric": $electric-blue,
@@ -43,8 +42,7 @@ $bright-canopy: #00ec9c !default;
 $bright-buzz: #ffcc00 !default;
 $bright-horizon: #ff640f !default;
 
-$brights : (
-  "purple": $bright-purple,
+$brights : ("purple": $bright-purple,
   "blue": $bright-blue,
   "electric": $bright-electric,
   "canopy": $bright-canopy,
@@ -67,7 +65,7 @@ $callout-color-warning: $rat-cap !default;
 $callout-color-important: $electric-blue !default;
 
 
-$br-default: 10px; 
+$br-default: 10px;
 $padding-default: 5px;
 $margin-default: 5px;
 $opacity-default: 0.5;
@@ -113,7 +111,7 @@ $opacity-default: 0.5;
 
 
 .horiz {
-  display: flex; 
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -144,51 +142,55 @@ $opacity-default: 0.5;
 // References slide and appends them to individual content slides.
 //
 // POSITIONING STRATEGY:
-// - Uses absolute positioning to place references at the bottom
-// - Positioned above the slide footer (if present) via bottom: 60px
-// - Inset from edges (60px) to align with typical content margins
+// - Uses absolute positioning with a very low bottom value (10px)
+// - Footnotes are positioned higher (bottom: 80px) via .reveal section aside rule
+// - This creates the visual order: content → footnotes → citations
+// - Both use absolute positioning to stay at the bottom of slides
 //
 // VISUAL DESIGN:
 // - Semi-transparent white background to ensure readability over slide backgrounds
 // - Border separator to visually distinguish from main slide content
 // - Smaller font size (0.45em) to be unobtrusive
-// - High z-index (10) to layer above slide backgrounds but below modals
+// - Lower z-index (5) than footnotes (10) so footnotes appear on top
 //
 // CUSTOMIZATION EXAMPLES:
-// - To change position: adjust bottom, left, right values
+// - To move citations up/down: adjust bottom value (smaller = lower on slide)
+// - To change left/right position: adjust left/right values
 // - To make darker/lighter: modify rgba() alpha value (0.95 = 95% opaque)
 // - To change text size: adjust font-size (em units scale with parent)
 // - To change separator: modify border-top color/width
 // - To remove background: set background: transparent
+// - To adjust footnote position: modify bottom in .reveal section aside rule
 //
 .reveal .slide-references {
-  // Position at bottom of slide, above footer area
+  // Use absolute positioning at the very bottom of the slide
+  // Footnotes typically position higher, so this ensures citations appear below them
   position: absolute;
-  bottom: 60px;     // Distance from bottom (leaves room for footer)
-  left: 60px;       // Distance from left edge
-  right: 60px;      // Distance from right edge (creates auto-width)
+  bottom: 10px; // Very close to bottom edge (lower than footnotes)
+  // left: 60px; // Distance from left edge
+  right: 90px; // Distance from right edge
 
   // Typography - small and readable
-  font-size: 0.45em;     // ~45% of normal slide text size
-  line-height: 1.3;      // Tighter line spacing for compactness
+  font-size: 0.45em; // ~45% of normal slide text size
+  line-height: 1.3; // Tighter line spacing for compactness
 
   // Visual separation from main content
-  border-top: 2px solid $pi-mile;  // Top border acts as separator
-  padding-top: 8px;                 // Space between border and text
+  border-top: 2px solid $pi-mile; // Top border acts as separator
+  padding-top: 8px; // Space between border and text
 
   // Background to ensure readability over slide backgrounds/images
   // Uses semi-transparent white (95% opaque)
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.250);
 
-  // Layer above backgrounds but below interactive elements
-  z-index: 10;
+  // Layer above backgrounds but below footnotes
+  z-index: 5;
 
   // Individual reference entry styling
   // Each reference is a .csl-entry div
   .csl-entry {
-    text-align: left;      // Left-align text (even if slide content is centered)
-    margin-bottom: 3px;    // Small gap between multiple references
-    line-height: 1.3;      // Compact line spacing
+    text-align: left; // Left-align text (even if slide content is centered)
+    margin-bottom: 3px; // Small gap between multiple references
+    line-height: 1.3; // Compact line spacing
   }
 
   // CSL (Citation Style Language) splits references into two parts:
@@ -199,11 +201,25 @@ $opacity-default: 0.5;
   // We make them inline so they flow horizontally: [1] Author, Title...
 
   .csl-left-margin {
-    display: inline;       // Flow inline with reference text
-    margin-right: 4px;     // Small space between [1] and reference text
+    display: inline; // Flow inline with reference text
+    margin-right: 4px; // Small space between [1] and reference text
   }
 
   .csl-right-inline {
-    display: inline;       // Flow inline with citation number
+    display: inline; // Flow inline with citation number
   }
+}
+
+// Position footnotes above citations
+// Footnotes should appear higher on the slide than citation references
+// Only apply when there are also citations (slide-references) on the slide
+.reveal .slides section.level2 aside {
+  position: absolute !important;
+  bottom: 160px !important; // Higher than citations (which are at 10px)
+  // left: 60px !important;
+  // right: 60px !important;
+  // max-width: calc(100% - 120px) !important;
+  // z-index: 10 !important; // Above citations and slide content
+  // display: block !important; // Ensure it's visible
+  // opacity: 1 !important; // Ensure it's not transparent
 }

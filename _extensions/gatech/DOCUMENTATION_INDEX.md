@@ -10,7 +10,7 @@ This document helps you find the information you need about the per-slide citati
 | **Full technical details** | `SLIDE_REFERENCES_FEATURE.md` |
 | **Configuration** | `_extension.yml` (lines 11-13) |
 | **JavaScript code** | `assets/slide-refs.js` |
-| **Styling/positioning** | `custom.scss` (lines 139-209) |
+| **Styling/positioning** | `custom.scss` (lines 139-222) |
 
 ## File Overview
 
@@ -63,16 +63,18 @@ This document helps you find the information you need about the per-slide citati
 - **Comment style:** Step-by-step with rationale
 
 #### `custom.scss` 🎨 STYLING
-- **Lines:** 139-209
-- **Purpose:** CSS that positions and styles the references
+- **Lines:** 139-222
+- **Purpose:** CSS that positions and styles the references and footnotes
 - **Contains:**
   - Header block: Overview of positioning strategy and visual design
   - Inline comments explaining each property
   - Examples of customizations in the header
+  - Uses absolute positioning with layered bottom values
+  - Separate rule for footnote positioning (line 216-222)
 - **Edit when:**
-  - Changing position (bottom, left, right)
+  - Changing citation position (bottom, left, right values)
+  - Changing footnote position (adjusts spacing between footnotes and citations)
   - Changing appearance (size, color, background)
-  - Adjusting spacing or layout
   - Modifying separator style
 - **Comment style:** Purpose and customization guidance
 
@@ -140,12 +142,14 @@ moreCode();
 
 | What to Change | Where to Look | What to Edit |
 |----------------|---------------|--------------|
-| Position (up/down/left/right) | `custom.scss` line 167-169 | `bottom`, `left`, `right` values |
-| Text size | `custom.scss` line 172 | `font-size` value |
-| Background color/opacity | `custom.scss` line 181 | `background` rgba values |
-| Separator line style | `custom.scss` line 176 | `border-top` properties |
+| Citation position (up/down/left/right) | `custom.scss` line 170-172 | `bottom`, `left`, `right` values |
+| Footnote position | `custom.scss` line 218 | `bottom` value in `.reveal .slides section.level2 aside` rule |
+| Layering (footnotes above citations) | `custom.scss` lines 186, 222 | `z-index` values (footnotes=10, citations=5) |
+| Text size | `custom.scss` line 175 | `font-size` value |
+| Background color/opacity | `custom.scss` line 183 | `background` rgba values |
+| Separator line style | `custom.scss` line 179 | `border-top` properties |
 | Which slides get references | `slide-refs.js` line 68 | querySelector selector |
-| Enable/disable feature | `_extension.yml` line 53-55 | Comment out include-after-body |
+| Enable/disable feature | `_extension.yml` line 11-13 | Comment out include-after-body |
 
 ### "Why isn't it working?"
 

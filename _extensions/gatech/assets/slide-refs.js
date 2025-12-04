@@ -131,8 +131,18 @@ Reveal.on('ready', function() {
         slideRefs.appendChild(allRefs[refId].cloneNode(true));
       });
 
-      // Add the references container to the end of the slide
-      slide.appendChild(slideRefs);
+      // PLACEMENT STRATEGY: Place citations below footnotes if they exist
+      // Footnotes are rendered in Quarto as <aside> elements with .aside-footnotes
+      // Also check for .footnotes class for other cases
+      const footnotesAside = slide.querySelector('aside');
+
+      if (footnotesAside) {
+        // Insert citations after the footnotes aside element
+        footnotesAside.parentNode.insertBefore(slideRefs, footnotesAside.nextSibling);
+      } else {
+        // No footnotes: add the references container to the end of the slide
+        slide.appendChild(slideRefs);
+      }
     }
   });
 });

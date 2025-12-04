@@ -33,6 +33,7 @@ With this feature, the full reference (author, year, title, publication, etc.) a
 │    - Finds all citations on each slide                      │
 │    - Looks up their full references from References slide   │
 │    - Clones and appends them to the bottom of each slide    │
+│    - Places citations AFTER footnotes if they exist         │
 └─────────────────────────────────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -40,6 +41,7 @@ With this feature, the full reference (author, year, title, publication, etc.) a
 │    - Positions them at the bottom                           │
 │    - Adds separator line and background                     │
 │    - Makes text smaller and readable                        │
+│    - Adds extra spacing when after footnotes                │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -96,6 +98,21 @@ Result on slide:
 - Text shows: "As shown by Smith (2020), the results are significant."
 - Bottom of slide shows: "[1] Smith, J. (2020)..."
 
+### With Footnotes
+
+```markdown
+## My Slide
+
+This is important.^[A footnote] See @smith2020 for details.
+```
+
+Result on slide:
+- Text shows: "This is important.¹ See [1] for details."
+- Footnote shows: "¹ A footnote"
+- Below footnote: "[1] Smith, J. (2020)..."
+
+**Note:** Citations always appear **below** footnotes to maintain a logical reading order.
+
 ## Customization
 
 ### Changing Reference Position
@@ -104,9 +121,9 @@ Edit `_extensions/gatech/custom.scss`:
 
 ```scss
 .reveal .slide-references {
-  bottom: 100px;  // Move higher up the slide
-  left: 40px;     // Less inset from left
-  right: 40px;    // Less inset from right
+  bottom: 20px;    // Higher on slide (default is 10px)
+  left: 80px;      // More inset from left (default is 60px)
+  right: 80px;     // More inset from right (default is 60px)
 }
 ```
 
@@ -134,6 +151,22 @@ Edit `_extensions/gatech/custom.scss`:
   border-top: 2px solid #333;  // Keep separator visible
 }
 ```
+
+### Adjusting Footnote Position
+
+Citations appear at `bottom: 10px` and footnotes at `bottom: 80px`. To adjust:
+
+```scss
+// Change where footnotes appear
+.reveal .slides section.level2 aside {
+  bottom: 100px !important;  // Higher on slide (default is 80px)
+}
+
+// This affects the gap between footnotes and citations
+// Larger bottom value = more space between them
+```
+
+**Note about z-index:** Footnotes have `z-index: 10` and citations have `z-index: 5`. This ensures footnotes appear **on top** even though both use absolute positioning. The citations box background is semi-transparent so footnotes remain visible through it.
 
 ### Changing Separator Style
 
