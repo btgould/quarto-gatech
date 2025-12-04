@@ -166,9 +166,9 @@ $opacity-default: 0.5;
   // Use absolute positioning at the very bottom of the slide
   // Footnotes typically position higher, so this ensures citations appear below them
   position: absolute;
-  bottom: 10px; // Very close to bottom edge (lower than footnotes)
-  // left: 60px; // Distance from left edge
-  right: 90px; // Distance from right edge
+  bottom: 0px; // Very close to bottom edge (lower than footnotes)
+  left: -5%; // Distance from left edge
+  right: 15%; // Distance from right edge
 
   // Typography - small and readable
   font-size: 0.45em; // ~45% of normal slide text size
