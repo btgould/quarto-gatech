@@ -25,7 +25,7 @@ $canopy-lime: #a4d233 !default;
 $rat-cap: #ffcd00 !default;
 $new-horizon: #e04f39 !default;
 
-$tertiaries : (
+$tertiaries: (
   "purple": $impact-purple,
   "blue": $bold-blue,
   "teal": $olympic-teal,
@@ -43,7 +43,7 @@ $bright-canopy: #00ec9c !default;
 $bright-buzz: #ffcc00 !default;
 $bright-horizon: #ff640f !default;
 
-$brights : (
+$brights: (
   "purple": $bright-purple,
   "blue": $bright-blue,
   "electric": $bright-electric,
@@ -66,54 +66,22 @@ $callout-color-caution: $new-horizon !default;
 $callout-color-warning: $rat-cap !default;
 $callout-color-important: $electric-blue !default;
 
-
-$br-default: 10px; 
+$br-default: 10px;
 $padding-default: 5px;
 $margin-default: 5px;
 $opacity-default: 0.5;
 
 /*-- scss:rules --*/
 
-.reveal .backgrounds .quarto-title-block {
-  background-image: url("/assets/background_title.png");
-  background-size: cover;
-}
-
-.reveal .backgrounds .title-slide {
-  background-image: url("/assets/background_section_blank.jpg");
-  background-size: cover;
-}
-
-.reveal .backgrounds {
-  background-image: url("/assets/background_slide.png");
-  background-size: cover;
-}
-
-.reveal .slides .pdf-page .slide-background.quarto-title-block {
-  background-image: url("/assets/background_title.png");
-  background-size: cover;
-}
-
-.reveal .slides .pdf-page .slide-background.title-slide.slide {
-  background-image: url("/assets/background_section_blank.jpg");
-  background-size: cover;
-}
-
-.reveal .slides .pdf-page .slide-background.slide {
-  background-image: url("/assets/background_slide.png");
-  background-size: cover;
-}
-
 .reveal .slides blockquote {
   color: $gray-matter;
   border-left: 4px solid $buzz-gold;
 }
 
-// Custom classes 
-
+// Custom classes
 
 .horiz {
-  display: flex; 
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
