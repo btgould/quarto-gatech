@@ -9,10 +9,10 @@ function Header(el)
 	if not el.attributes["background-image"] then
 		if el.level == 1 then
 			el.attributes["background-image"] = "assets/background_section_blank.jpg"
-			el.attributes["background-size"] = "cover"
+			el.attributes["background-size"] = "contain"
 		elseif el.level == 2 then
 			el.attributes["background-image"] = "assets/background_slide.png"
-			el.attributes["background-size"] = "cover"
+			el.attributes["background-size"] = "contain"
 		end
 	end
 

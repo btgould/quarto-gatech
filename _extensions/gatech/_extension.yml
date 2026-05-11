@@ -5,10 +5,11 @@ quarto-required: ">=1.7.0"
 contributes:
   formats:
     revealjs:
-      width: 1600
-      height: 900
+      width: 1920
+      height: 1080
+      max-scale: 5
       filters: [bg.lua]
       theme: [custom.scss]
       title-slide-attributes:
         data-background-image: assets/background_title.png
-        data-background-size: cover
+        data-background-size: contain
