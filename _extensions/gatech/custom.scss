@@ -60,11 +60,11 @@ $font-family-sans-serif: "Roboto" !default;
 
 $body-color: $navy-blue !default;
 
-$callout-color-note: $yellow !default;
-$callout-color-tip: $canopy-lime !default;
-$callout-color-caution: $new-horizon !default;
-$callout-color-warning: $rat-cap !default;
-$callout-color-important: $electric-blue !default;
+$callout-color-note: $bright-blue !default;
+$callout-color-warning: $bright-buzz !default;
+$callout-color-important: $bright-electric !default;
+$callout-color-tip: $bright-canopy !default;
+$callout-color-caution: $bright-horizon !default;
 
 $br-default: 10px;
 $padding-default: 5px;
@@ -102,4 +102,60 @@ $opacity-default: 0.5;
   .reveal .slides section .fragment.hl-#{$color}.visible {
     background-color: rgba($value, $opacity-default);
   }
+}
+
+.callout.callout-style-default .callout-body {
+  font-size: 2.5rem !important;
+  line-height: 0.6 !important;
+}
+
+$callout-types: (
+  "note": $bright-blue,
+  "warning": $bright-buzz,
+  "important": $bright-electric,
+  "tip": $bright-canopy,
+  "caution": $bright-horizon,
+);
+
+@each $type, $color in $callout-types {
+  .reveal div.callout.callout-#{$type}.callout-style-default .callout-title {
+    background-color: rgba($color, 0.4);
+  }
+}
+
+.reveal div.gt-theorem {
+  border-left: 0.3rem solid $tech-gold;
+  margin: 1rem 0;
+  border-radius: 0.25rem;
+  overflow: hidden;
+
+  > .theorem-title-bar {
+    background-color: rgba($tech-gold, 0.4);
+    padding: 0.5rem 1rem;
+
+    > p {
+      margin: 0;
+    }
+  }
+
+  > .theorem-body {
+    padding: 0.5rem 1rem;
+
+    > p:first-child {
+      margin-top: 0;
+    }
+
+    > p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.title {
+  font-size: 4.5rem !important;
+}
+
+aside {
+  color: $navy-blue !important;
+  font-size: 1.3rem !important;
 }
