@@ -1,23 +1,20 @@
-# <%= title %> Format
+# quarto-gatech
 
-## Installing
+A Quarto format extension that applies Georgia Tech brand identity to RevealJS presentations.
 
-*TODO*: Replace the `<github-organization>` with your GitHub organization.
+## Install
 
 ```bash
-quarto use template <github-organization>/<%= filesafename %>
+quarto use template btgould/quarto-gatech
 ```
 
-This will install the extension and create an example qmd file that you can use as a starting place for your article.
+## Use
 
-## Using
+```yaml
+---
+title: My Talk
+format: gatech-revealjs
+---
+```
 
-*TODO*: Describe how to use your format.
-
-## Format Options
-
-*TODO*: If your format has options that can be set via document metadata, describe them.
-
-## Example
-
-Here is the source code for a minimal sample document: [example.qmd](example.qmd).
+Section headings (`#`) and slide headings (`##`) get GT-branded background images automatically. See `template.qmd` for a starting point.
