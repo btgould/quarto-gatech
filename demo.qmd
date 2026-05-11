@@ -49,7 +49,7 @@ Text after math
 
 The result of @thm-analytic-extension is super cool and not at all misunderstood
 
-::: {#thm-line name="Line" number="A"}
+::: {#thm-line name="Line"}
 The equation of any straight line, called a linear equation, has the form:
 
 $$
@@ -63,11 +63,19 @@ This is the standard form of @thm-line.
 
 ## Result (cont.)
 
-::: {#prp-folklore .unnumbered name="Folklore"}
+::: {#prp-folklore name="Folklore"}
 Everyone already knows this.
 :::
 
 By @prp-folklore, no proof is required.
+
+::: {#cor-archimedes name="Archimedes" number="Ω"}
+Give me a place to stand, and I shall move the earth.
+:::
+
+## Cross-Slide Ref
+
+The proof of @cor-archimedes is left as an exercise.
 
 
 ## Citations

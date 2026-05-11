@@ -123,31 +123,11 @@ $callout-types: (
   }
 }
 
-.reveal div.gt-theorem {
-  border-left: 0.3rem solid $tech-gold;
-  margin: 1rem 0;
-  border-radius: 0.25rem;
-  overflow: hidden;
+.reveal .theorem-callout div.callout {
+  border-left-color: $tech-gold;
 
-  > .theorem-title-bar {
+  &.callout-style-default .callout-title {
     background-color: rgba($tech-gold, 0.4);
-    padding: 0.5rem 1rem;
-
-    > p {
-      margin: 0;
-    }
-  }
-
-  > .theorem-body {
-    padding: 0.5rem 1rem;
-
-    > p:first-child {
-      margin-top: 0;
-    }
-
-    > p:last-child {
-      margin-bottom: 0;
-    }
   }
 }
 

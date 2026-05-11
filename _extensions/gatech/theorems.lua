@@ -1,14 +1,31 @@
-local theorem_classes = {
-	theorem = true, lemma = true, corollary = true, proposition = true,
-	conjecture = true, definition = true, example = true, exercise = true,
-	algorithm = true, remark = true, solution = true,
+local theorem_callouts = {
+	thm = "Theorem",
+	prp = "Proposition",
+	lem = "Lemma",
+	cor = "Corollary",
+	cnj = "Conjecture",
+	def = "Definition",
+	exm = "Example",
+	exr = "Exercise",
+	alg = "Algorithm",
 }
 
-local function is_theorem_div(div)
-	for _, c in ipairs(div.classes) do
-		if theorem_classes[c] then return true end
+if type(_G.add_crossref_category) == "function"
+	and type(_G.crossref) == "table"
+	and type(_G.crossref.categories) == "table"
+then
+	for ref_type, name in pairs(theorem_callouts) do
+		if _G.crossref.categories.by_ref_type[ref_type] == nil then
+			_G.add_crossref_category({
+				kind     = "Block",
+				name     = name,
+				prefix   = name,
+				ref_type = ref_type,
+			})
+		end
 	end
-	return false
+else
+	error("theorems.lua: Quarto crossref API (add_crossref_category / crossref.categories) not accessible from filter sandbox; cannot register theorem-callout ref_types")
 end
 
 local function has_class(classes, name)
@@ -18,99 +35,99 @@ local function has_class(classes, name)
 	return false
 end
 
-local custom_numbers = {}
+-- pre-ast pass: route raw theorem-prefix divs into Quarto's callout pipeline.
+function Div(div)
+	if div.identifier == "" then return end
+	local ref_type = div.identifier:match("^(%a+)%-")
+	if not ref_type or theorem_callouts[ref_type] == nil then return end
+	if has_class(div.classes, "theorem-callout") then return end
 
-local function restructure(div)
-	if not is_theorem_div(div) then return end
-	if #div.content == 0 then return end
+	div.classes:insert("callout-note")
+	div.classes:insert("theorem-callout")
 
-	local first = div.content[1]
-	if first.t ~= "Para" or #first.content == 0 then return end
-
-	local title_span = first.content[1]
-	if title_span.t ~= "Span" or not has_class(title_span.classes, "theorem-title") then return end
-
-	local unnumbered = has_class(div.classes, "unnumbered") or div.attributes.number == ""
-	local custom_number = (not unnumbered) and div.attributes.number or nil
-
-	if unnumbered or custom_number then
-		local strong = title_span.content[1]
-		if strong and strong.t == "Strong" then
-			local text = pandoc.utils.stringify(strong.content)
-			local typename = text:match("^(%a+)")
-			local name = text:match("%((.-)%)%s*$")
-			if typename then
-				local parts = pandoc.List({ pandoc.Str(typename) })
-				if not unnumbered and custom_number then
-					parts:insert(pandoc.Str("\u{a0}"))
-					parts:insert(pandoc.Str(custom_number))
-				end
-				if name then
-					parts:insert(pandoc.Space())
-					parts:insert(pandoc.Str("(" .. name .. ")"))
-				end
-				strong.content = parts
-				if div.identifier ~= "" then
-					custom_numbers[div.identifier] = unnumbered and "" or custom_number
-				end
-			end
-		end
+	if div.attributes.name then
+		div.attributes.title = div.attributes.name
+		div.attributes.name = nil
 	end
 
-	local title_bar = pandoc.Div(
-		pandoc.Para(title_span.content),
-		pandoc.Attr("", { "theorem-title-bar" })
-	)
-
-	local remaining = pandoc.List({})
-	local start_idx = 2
-	if first.content[2] and first.content[2].t == "Space" then start_idx = 3 end
-	for k = start_idx, #first.content do
-		remaining:insert(first.content[k])
-	end
-
-	local body_blocks = pandoc.List({})
-	if #remaining > 0 then
-		body_blocks:insert(pandoc.Para(remaining))
-	end
-	for k = 2, #div.content do
-		body_blocks:insert(div.content[k])
-	end
-
-	local body = pandoc.Div(body_blocks, pandoc.Attr("", { "theorem-body" }))
-
-	div.content = pandoc.List({ title_bar, body })
-	div.classes:insert("gt-theorem")
+	div.attributes.icon = "false"
 	return div
 end
 
-local function rewrite_xref(link)
-	if not has_class(link.classes, "quarto-xref") then return end
-	local target = link.target:match("^#/?(.+)$")
-	if not target then return end
-	local custom = custom_numbers[target]
-	if custom == nil then return end
-
-	local text = pandoc.utils.stringify(link.content)
-	local typename = text:match("^(%a+)")
-	if not typename then return end
-
-	local new_content
-	if custom == "" then
-		new_content = pandoc.List({ pandoc.Str(typename) })
-	else
-		new_content = pandoc.List({
-			pandoc.Str(typename),
-			pandoc.Str("\u{a0}"),
-			pandoc.Str(custom),
-		})
-	end
-
-	return pandoc.Link(new_content, link.target, link.title, link.attr)
-end
-
+-- post-render pass: replace Quarto's auto-number in the decorated title for
+-- any callout that carries a `number="X"` attribute, and keep matching @-refs
+-- in sync.
 function Pandoc(doc)
-	doc = doc:walk({ Div = restructure })
-	doc = doc:walk({ Link = rewrite_xref })
+	local custom_numbers = {}
+
+	doc = doc:walk({
+		Div = function(div)
+			if not has_class(div.classes, "theorem-callout") then return end
+			local custom = div.attributes.number
+			if not custom or custom == "" then return end
+
+			custom_numbers[div.identifier] = custom
+
+			-- Inside the rendered callout wrapper, only the Strong nested in
+			-- the .callout-title child carries the decorated title:
+			--   [Str("Theorem"), Str(NBSP), Str(<auto-number>), Str(":"), Space, …name]
+			-- Targeting just that Strong (instead of any Strong in the body)
+			-- avoids clobbering bold runs in the theorem statement.
+			return div:walk({
+				Div = function(inner)
+					if not has_class(inner.classes, "callout-title") then return end
+					local para = inner.content[1]
+					if not para or para.t ~= "Para" then
+						error(string.format(
+							"theorems.lua: expected .callout-title in #%s to start with a Para, got %s",
+							div.identifier, para and para.t or "nil"
+						))
+					end
+					local strong = para.content[1]
+					if not strong or strong.t ~= "Strong" then
+						error(string.format(
+							"theorems.lua: expected .callout-title Para in #%s to start with a Strong, got %s",
+							div.identifier, strong and strong.t or "nil"
+						))
+					end
+					local third = strong.content[3]
+					if not third or third.t ~= "Str" or not third.text:match("^%d") then
+						local got = third and (third.t .. (third.text and ("(" .. third.text .. ")") or "")) or "nil"
+						local stringified = pandoc.utils.stringify(strong.content)
+						error(string.format(
+							"theorems.lua: expected position 3 of decorated callout title for #%s to be a numeric Str; got %s. Full title: %q. The auto-number layout from Quarto's titlePrefix may have changed.",
+							div.identifier, got, stringified
+						))
+					end
+					strong.content[3] = pandoc.Str(custom)
+					return inner
+				end,
+			})
+		end,
+	})
+
+	doc = doc:walk({
+		Link = function(link)
+			if not has_class(link.classes, "quarto-xref") then return end
+			local target = link.target:match("^#/?(.+)$")
+			if not target then return end
+			local custom = custom_numbers[target]
+			if not custom then return end
+
+			local text = pandoc.utils.stringify(link.content)
+			local typename = text:match("^(%a+)")
+			if not typename then return end
+
+			return pandoc.Link(
+				pandoc.List({
+					pandoc.Str(typename),
+					pandoc.Str("\u{a0}"),
+					pandoc.Str(custom),
+				}),
+				link.target, link.title, link.attr
+			)
+		end,
+	})
+
 	return doc
 end
