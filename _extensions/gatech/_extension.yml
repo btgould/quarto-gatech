@@ -21,3 +21,5 @@ contributes:
       title-slide-attributes:
         data-background-image: assets/background_title.png
         data-background-size: contain
+      slide-number: c/t
+      incremental: false
