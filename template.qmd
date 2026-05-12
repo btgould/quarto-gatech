@@ -1,14 +1,18 @@
 ---
-title: Untitled
+title: GA Tech Quarto Style
 format:
   gatech-revealjs: default
-author: Brendan Gould
-date: last-modified
+author: 
+  - name: <b>Presenter Name</b>
+  - name: Co-author name
+    affiliation: Georgia Institute of Technology
+  - name: Co-author name
 ---
 
 # Section 
 
-Test
+Multiple section (`#`) slide backgrounds.
+Review `assets/background_section*`.
 
 ## Introduction
 

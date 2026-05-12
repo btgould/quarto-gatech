@@ -18,3 +18,5 @@ format: gatech-revealjs
 ```
 
 Section headings (`#`) and slide headings (`##`) get GT-branded background images automatically. See `template.qmd` for a starting point.
+Also uses official fonts and color scheme.
+
