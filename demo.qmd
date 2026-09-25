@@ -83,6 +83,10 @@ The proof of @cor-archimedes is left as an exercise.
 Information theory was founded by Shannon [@shannon1948].
 The transformer architecture has since become foundational in deep learning [@vaswani2017].
 
+::: {.fragment}
+Safety filters are commonly built on control barrier functions [@ames2019cbf].
+:::
+
 ## More Information
 
 You can learn more about controlling the appearance of RevealJS output here: <https://quarto.org/docs/presentations/revealjs/>

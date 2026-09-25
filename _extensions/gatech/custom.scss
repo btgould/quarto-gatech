@@ -134,4 +134,17 @@ $callout-types: (
 aside {
   color: $navy-blue !important;
   font-size: 1.3rem !important;
+  width: 1600px;
+}
+
+/* Print/PDF export: the per-slide citation aside (per-slide-refs.lua) is
+   `position: absolute` by default, so it does not count toward the slide's
+   measured scrollHeight. reveal.js sizes each printed page from that height
+   and clips the aside off the bottom. In print view, let it flow in-line so
+   the page grows to contain every reference. */
+html.reveal-print .reveal .slide aside,
+html.reveal-print .reveal .slide div.aside {
+  position: relative !important;
+  bottom: auto !important;
+  margin-top: 0.6em;
 }

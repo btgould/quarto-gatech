@@ -10,6 +10,7 @@ contributes:
       max-scale: 5
       filters:
         - bg.lua
+        - per-slide-refs.lua
         - at: pre-ast
           path: theorems.lua
         - at: post-render
