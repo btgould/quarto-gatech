@@ -10,9 +10,10 @@ date: last-modified
 bibliography: references.bib
 ---
 
-# Section
+# Section {.gatech-show-section}
 
-Test
+Section dividers are hidden by default; `{.gatech-show-section}` keeps this one
+so the section background is visible. `# Styling` below is hidden.
 
 ## Introduction
 

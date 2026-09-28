@@ -70,6 +70,9 @@ a single agenda slide instead of a divider before every section. The slide count
 counts only the slides that are shown. To keep one divider, write
 `# Title {.gatech-show-section}`. To keep all of them, set `hide-section-slides: false`.
 
+Content written directly under a `#` heading (before the first `##`) lives on the
+divider slide, so it is hidden along with it. Put it on a `##` slide instead.
+
 ### Per-slide references
 
 A citation inside a fragment (`. . .` or `::: {.fragment}`) shows up together with that
