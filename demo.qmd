@@ -1,0 +1,138 @@
+---
+title: GT Theme Demo
+subtitle: Every feature of `gatech-revealjs` on one deck
+format:
+  gatech-revealjs: default
+author:
+  - name: Brendan Gould
+  - name: Evanns Morales
+date: last-modified
+bibliography: references.bib
+---
+
+# Section
+
+Test
+
+## Introduction
+
+::: {.callout-note}
+Test
+:::
+
+::: {.callout-warning}
+Test
+:::
+
+::: {.callout-important}
+Test
+:::
+
+::: {.callout-tip}
+Test
+:::
+
+::: {.callout-caution title="Test title"}
+Test
+:::
+
+## Result
+
+::: {#thm-analytic-extension name="Analytic extension"}
+Text before math
+
+$$
+\sum_{i=1}^{\infty} \frac{1}{i^{-1}} = - \frac{1}{12}.
+$$
+
+Text after math
+:::
+
+The result of @thm-analytic-extension is super cool and not at all misunderstood
+
+::: {#thm-line name="Line"}
+The equation of any straight line, called a linear equation, has the form:
+
+$$
+y = mx + b
+$$
+
+where $m$ is the slope and $b$ is the y-intercept.
+:::
+
+This is the standard form of @thm-line.
+
+## Result (cont.)
+
+::: {#prp-folklore name="Folklore"}
+Everyone already knows this.
+:::
+
+By @prp-folklore, no proof is required.
+
+::: {#cor-archimedes name="Archimedes" number="Ω"}
+Give me a place to stand, and I shall move the earth.
+:::
+
+## Cross-Slide Ref
+
+The proof of @cor-archimedes is left as an exercise.
+
+
+## Citations
+
+Information theory was founded by Shannon [@shannon1948].
+The transformer architecture has since become foundational in deep learning [@vaswani2017].
+
+::: {.fragment}
+Safety filters are commonly built on control barrier functions [@ames2019cbf].
+:::
+
+## Citations and Footnotes
+
+Footnotes and per-slide references share the bottom of the slide.^[A footnote on the same slide as a citation.]
+Channel capacity is a classic result [@shannon1948].
+
+# Styling
+
+## Highlights
+
+::: {.hl-purple}
+`.hl-purple`
+:::
+
+::: {.hl-canopy}
+`.hl-canopy`
+:::
+
+::: {.fragment .hl-blue}
+`.fragment .hl-blue`: the highlight fades in on click
+:::
+
+::: {.fragment .hl-horizon}
+`.fragment .hl-horizon`
+:::
+
+Colors: `purple`, `blue`, `electric`, `canopy`, `buzz`, `horizon`.
+
+## Layout and Quotes
+
+::: {.horiz}
+::: {.hl-electric}
+Left
+:::
+::: {.hl-buzz}
+Center
+:::
+::: {.hl-horizon}
+Right
+:::
+:::
+
+> Blockquotes use Gray Matter text with a Buzz Gold rule.
+
+## More Information
+
+You can learn more about controlling the appearance of RevealJS output here: <https://quarto.org/docs/presentations/revealjs/>
+
+## References

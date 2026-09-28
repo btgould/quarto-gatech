@@ -1,55 +1,47 @@
 ---
-title: "Hello world<br>Hello world even more"
-
-subtitle: "An Example Quarto RevealJS Presentation"
-
+title: "Presentation Title"
+subtitle: "Optional Subtitle"
 author:
-  - name: YOUR NAME HERE
-    affiliation: 
-      - YOUR AFFILIATION HERE
-    email: your.email@domain.com
-
+  - name: "<b>Presenter Name</b>"
+    affiliation: Georgia Institute of Technology
+    email: presenter@gatech.edu
+  - name: Co-author Name
+    affiliation: Georgia Institute of Technology
 date: last-modified
 date-format: "MMMM D, YYYY"
-bibliography: references.bib
-csl: _extensions/gatech/assets/ieee-compact.csl
+format:
+  gatech-revealjs:
+    toc: true                  # agenda slide listing the `#` sections
+    hide-section-slides: true  # skip `#` divider slides; they stay in the TOC
+# bibliography: references.bib # add your own .bib to get per-slide references
 ---
 
+# Background
 
-# Section 1
-## One
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. [See @10684122;@MSB:98 for details]. We also test footnotes.^[This is a footnote example.]
+## Motivation
 
-Here we have another paragraph and another footnotes.^[This is another footnote example.]
+- Level-1 headings (`#`) group slides into sections
+- Level-2 headings (`##`) start a new slide
+- Remove `hide-section-slides` above to show a divider slide for each section
 
-How about a third paragraph and a long footnotes[^longnote].
+## Related Work
 
-[^longnote]: This is a long footnote example. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-## Two
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. [@bauer2011runtime]
-
-## Three
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-
-# Section 2
-
-## Four
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-
-## Five
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-
-# Section 3
-
-## Six
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-
-## Conclusion
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-
-
-# References
-## References
-::: {.references}
+::: {.callout-note title="Citations"}
+Add a `bibliography:` to the front matter and cite with `[@key]`.
+Each slide then lists the references it cites along its bottom edge.
 :::
+
+# Approach
+
+## Method
+
+::: {.fragment .hl-blue}
+Highlights can appear on click
+:::
+
+# Conclusion
+
+## Summary
+
+See `demo.qmd` in the [extension repository](https://github.com/btgould/quarto-gatech)
+for every feature of the theme.

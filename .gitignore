@@ -1,6 +1,7 @@
 template.html
 template_files/
+demo.html
+demo_files/
 /assets
 /.quarto/
-_output/
 .claude/

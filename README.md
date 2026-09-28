@@ -1,228 +1,114 @@
-# Georgia Tech Quarto RevealJS Theme
+# quarto-gatech
+
 ![Quarto Extension](https://img.shields.io/badge/Quarto-Extension-blue?logo=quarto)
-![Georgia Tech](https://img.shields.io/badge/Brand-Georgia_Tech-%23003057?logo=google-scholar&logoColor=white)
-![RevealJS](https://img.shields.io/badge/RevealJS-Presentation_Framework-black?logo=reveal.js)
-[![evannsmc.com](https://img.shields.io/badge/evannsmc.com-Project%20Page-blue)](https://www.evannsmc.com/projects/gatech-slides)
+![RevealJS](https://img.shields.io/badge/RevealJS-Presentations-black?logo=reveal.js)
 
-A professional Quarto extension providing Georgia Tech-branded styling for RevealJS presentations.
+A Quarto format extension that applies Georgia Tech brand identity to RevealJS presentations.
 
-## Features
+## Install
 
-- Official Georgia Tech color palette (primary, secondary, and tertiary colors)
-- Branded background images for title, section, and content slides
-- Custom highlight classes with animation support for progressive reveals
-- Standardized callout styling using GT colors
-- Flexible layout utilities
-- 1600x900 widescreen presentation format
-- Roboto typography for clean, modern appearance
-
-## To Use:
-
-### Option 1: Use as a Quarto template locally
-```bash
-quarto use template evannsmc/quarto-gatech-slides
-```
-
-### Option 2: Use this repository directly
+Start a new presentation from the template:
 
 ```bash
-git clone <repository-url> quarto-gatech
-cd quarto-gatech
+quarto use template btgould/quarto-gatech
 ```
 
-## Quick Start
+This copies the extension into `_extensions/` and adds a starter `template.qmd`.
+To add the format to an existing project instead, run `quarto add btgould/quarto-gatech`.
 
-1. Create a new presentation file (e.g., `my-presentation.qmd`):
+## Use
 
 ```yaml
 ---
-title: "My Presentation"
-subtitle: "Optional Subtitle"
-author:
-    - name: Author Name
-    affiliation: 
-      - Your Affiliation
-    email: your.email@example.com
-
-date: last-modified
-date-format: "MMMM D, YYYY"
+title: My Talk
+format: gatech-revealjs
 ---
-
-# Introduction
-
-This is a section slide.
-
-## Content Slide
-
-- Bullet point 1
-- Bullet point 2
-
-::: {.hl-purple}
-Highlighted text with Georgia Tech purple
-:::
-
-## Another Slide
-
-::: {.callout-tip}
-## Pro Tip
-Use fragments for progressive reveal!
-:::
 ```
-
-2. Render your presentation:
 
 ```bash
-quarto render my-presentation.qmd
+quarto preview template.qmd   # live reload while editing
+quarto render template.qmd    # write template.html
 ```
 
-Or use preview mode for live updates:
+`#` headings start a section and `##` headings start a slide. Both get GT-branded
+backgrounds automatically. See `demo.qmd` for every feature below on a rendered deck.
 
-```bash
-quarto preview my-presentation.qmd
-```
+## Features
 
-## Using the Theme
+- **Branding**: official GT colors, Roboto type, and background images for the title,
+  section, and content slides. The deck is 1920×1080 with a `c/t` slide counter.
+- **Per-slide references**: add a `bibliography:` and each slide lists the entries it
+  cites along its bottom edge (details below).
+- **Callouts** are recolored with GT's bright palette. Give a callout a title with
+  `::: {.callout-tip title="My title"}`.
+- **Theorem blocks**: divs with a `#thm-`, `#lem-`, `#def-`, … id become gold callouts
+  that can be cross-referenced with `@thm-…`. Add `name="…"` for a title and
+  `number="…"` to override the automatic number.
+- **Highlights**: `.hl-purple`, `.hl-blue`, `.hl-electric`, `.hl-canopy`, `.hl-buzz`,
+  `.hl-horizon`. Combine one with `.fragment` and the highlight fades in on click.
+- **Layout**: `::: {.horiz}` places its children side by side, centered.
 
-### Slide Structure
+## Options
 
-- **Title slide**: Automatically generated from YAML frontmatter
-- **Section slides**: Use level 1 headers (`# Section Name`)
-- **Content slides**: Use level 2 headers (`## Slide Title`)
-
-### Custom Classes
-
-**Highlight classes** (with animation support):
-```markdown
-::: {.hl-purple}
-Purple highlighted text
-:::
-
-::: {.fragment .hl-blue}
-Blue highlight appears on click
-:::
-```
-
-Available colors: `purple`, `blue`, `electric`, `canopy`, `buzz`, `horizon`
-
-**Horizontal layout**:
-```markdown
-::: {.horiz}
-Content arranged horizontally
-:::
-```
-
-### Callouts
-
-Use Quarto's built-in callout syntax with Georgia Tech colors:
-
-```markdown
-::: {.callout-note}
-Note content (yellow)
-:::
-
-::: {.callout-tip}
-Tip content (canopy lime)
-:::
-
-::: {.callout-important}
-Important content (electric blue)
-:::
-
-::: {.callout-caution}
-Caution content (new horizon orange)
-:::
-
-::: {.callout-warning}
-Warning content (rat cap yellow)
-:::
-```
-
-## Format Options
-
-Set these in your document's YAML frontmatter under `gatech-revealjs`:
+Set these under the format:
 
 ```yaml
 format:
   gatech-revealjs:
-    incremental: true        # Make lists appear incrementally
-    slide-number: true       # Show slide numbers
-    transition: slide        # Transition style
-    theme-variant: dark      # Not currently implemented
+    toc: true                  # agenda slide listing sections and slides
+    hide-section-slides: true  # opt-in, see below
 ```
 
-For all RevealJS options, see: https://quarto.org/docs/presentations/revealjs/
+Standard [RevealJS options](https://quarto.org/docs/presentations/revealjs/) work
+here too (`incremental`, `transition`, `slide-number`, …).
 
-## Customization
+### Hidden section slides
 
-All theme customization is in `_extensions/gatech/custom.scss`:
+`hide-section-slides: true` removes the `#` divider slides from the talk. The headings
+still group the slides and still appear in the table of contents, so `toc: true` gives
+a single agenda slide instead of a divider before every section. The slide counter
+counts only the slides that are shown. To keep one divider, write
+`# Title {.gatech-show-section}`.
 
-- **Colors**: Modify SCSS variables in the `scss:defaults` section
-- **Backgrounds**: Replace images in `_extensions/gatech/assets/` or update paths
-- **Typography**: Change `$font-family-sans-serif` variable
-- **Spacing**: Adjust `$padding-default`, `$margin-default`, `$br-default`
+### Per-slide references
 
-See [THEME_DOCUMENTATION.md](_extensions/gatech/THEME_DOCUMENTATION.md) for comprehensive customization guide.
+A citation inside a fragment (`. . .` or `::: {.fragment}`) shows up together with that
+fragment. A citation outside any fragment shows up with the slide. The end-of-deck
+bibliography keeps full entries. The per-slide copies are compacted: venue names are
+abbreviated using `_extensions/gatech/citation-abbrev.lua` (extend it for venues it
+doesn't know), and page, volume, and DOI details are dropped. When you export to PDF,
+the references flow inline so they aren't cut off at the bottom of the page.
 
-## Background Images
+To collect every reference on a final slide, end the deck with an empty `## References`
+heading.
 
-The theme includes six background images:
+## Customizing
 
-- `background_title.png` - Opening title slide
-- `background_slide.png` - Regular content slides
-- `background_section_blank.jpg` - Section dividers (default)
-- `background_section_building.jpg` - Alternative section background
-- `background_section_car.jpg` - Alternative section background
-- `background_section_students.jpg` - Alternative section background
+Colors, fonts, and spacing are SCSS variables at the top of
+`_extensions/gatech/custom.scss`. Each is declared `!default`, so you can override it
+from your own theme file without editing the extension:
 
-Replace files in `_extensions/gatech/assets/` to customize.
+```yaml
+format:
+  gatech-revealjs:
+    theme: [my-overrides.scss]   # layered on top of the GT theme
+```
 
-## Color Palette
+Background images live in `_extensions/gatech/assets/`. To use a different one on a
+single slide, set it on the heading:
+`## Slide {background-image="_extensions/gatech/assets/background_section_car.jpg"}`.
 
-**Primary Colors:**
-- Navy Blue: `#003057`
-- Tech Gold: `#b3a369`
-- White: `#ffffff`
-
-**Secondary Colors:**
-- Gray Matter: `#54585a`
-- Buzz Gold: `#eaaa00`
-
-**Tertiary "Bright" Colors** (for highlights):
-- Bright Purple: `#7800ff`
-- Bright Blue: `#2961ff`
-- Bright Electric: `#00ffff`
-- Bright Canopy: `#00ec9c`
-- Bright Buzz: `#ffcc00`
-- Bright Horizon: `#ff640f`
-
-## Documentation
-
-For complete documentation on how the theme works, including:
-- Architecture and compilation process
-- SCSS structure and customization
-- Advanced usage examples
-- Troubleshooting
-
-See **[THEME_DOCUMENTATION.md](_extensions/gatech/THEME_DOCUMENTATION.md)**
-
-## Example
-
-See [template.qmd](template.qmd) for a basic example presentation.
+| File | Used for |
+|---|---|
+| `background_title.png` | Title slide |
+| `background_slide.png` | `##` content slides and the TOC |
+| `background_section_blank.jpg` | `#` section slides |
+| `background_section_{building,car,students}.jpg` | Alternative section backgrounds |
 
 ## Requirements
 
-- Quarto >= 1.7.0
-
-## Website
-
-This project is part of the [evannsmc open-source portfolio](https://www.evannsmc.com/projects).
-
-- [Project page](https://www.evannsmc.com/projects/gatech-slides)
-
-## License
-
-[Specify your license]
+Quarto ≥ 1.7.0
 
 ## Credits
 
-Created by Brendan Gould and Evanns Morales
+Brendan Gould and Evanns Morales
