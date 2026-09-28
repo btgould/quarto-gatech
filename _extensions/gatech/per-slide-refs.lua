@@ -20,11 +20,45 @@
 -- citations outside any fragment go in a base, always-visible aside.
 -- Documents with no citations are returned unchanged.
 
+-- Quarto cross-references (`@thm-foo`, `@fig-bar`, ...) are still Cite
+-- elements when this filter runs. They must not reach citeproc, which would
+-- look them up in the bibliography and warn "citation ... not found".
+local crossref_prefixes = {
+  fig = true, tbl = true, lst = true, eq = true, sec = true,
+  thm = true, lem = true, cor = true, prp = true, cnj = true,
+  def = true, exm = true, exr = true, sol = true, rem = true, alg = true,
+  nte = true, tip = true, wrn = true, imp = true, cau = true,
+}
+
+local function is_crossref(id)
+  local prefix = id:match('^(%a+)%-')
+  return prefix ~= nil and crossref_prefixes[prefix] == true
+end
+
+-- Copy of `doc` with cross-reference keys removed from every Cite; a Cite
+-- left with no bibliography keys is dropped entirely.
+local function without_crossrefs(doc)
+  return doc:walk({
+    Cite = function(c)
+      local kept = pandoc.List({})
+      for _, cit in ipairs(c.citations) do
+        if not is_crossref(cit.id) then kept:insert(cit) end
+      end
+      if #kept == #c.citations then return nil end
+      if #kept == 0 then return {} end
+      c.citations = kept
+      return c
+    end,
+  })
+end
+
 local function has_citations(doc)
   local found = false
   doc:walk({
     Cite = function(c)
-      found = true
+      for _, cit in ipairs(c.citations) do
+        if not is_crossref(cit.id) then found = true end
+      end
       return c
     end,
   })
@@ -268,7 +302,7 @@ function Pandoc(doc)
   -- The original `doc` stays untouched so Quarto's own citeproc pass
   -- still processes inline citations (hover popups, styled [1] links,
   -- end-of-deck bibliography).
-  local rendered = pandoc.utils.citeproc(doc)
+  local rendered = pandoc.utils.citeproc(without_crossrefs(doc))
   harvest_refs(rendered.blocks)
 
   local out, slide, in_slide = {}, {}, false
