@@ -1,8 +1,10 @@
 -- hide-sections.lua
 --
--- Opt-in: with `hide-section-slides: true` under the format, level-1 (`#`)
--- section slides are dropped from the presentation while their headings
--- still structure the deck and appear in the table of contents (`toc: true`).
+-- Level-1 (`#`) section slides are dropped from the presentation while their
+-- headings still structure the deck and appear in the table of contents
+-- (`toc: true`). On by default (`hide-section-slides: true` in
+-- _extension.yml); set `hide-section-slides: false` under the format to keep
+-- the divider slides.
 --
 -- reveal.js's own `visibility="hidden"` can't be used here: Quarto strips
 -- hidden slides before building the TOC, so the sections vanish from it too.

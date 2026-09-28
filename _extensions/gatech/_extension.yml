@@ -25,4 +25,4 @@ contributes:
         data-background-size: contain
       slide-number: c/t
       incremental: false
-      hide-section-slides: false
+      hide-section-slides: true

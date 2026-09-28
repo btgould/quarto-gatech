@@ -56,7 +56,7 @@ Set these under the format:
 format:
   gatech-revealjs:
     toc: true                  # agenda slide listing sections and slides
-    hide-section-slides: true  # opt-in, see below
+    hide-section-slides: false # show `#` divider slides (hidden by default)
 ```
 
 Standard [RevealJS options](https://quarto.org/docs/presentations/revealjs/) work
@@ -64,11 +64,11 @@ here too (`incremental`, `transition`, `slide-number`, …).
 
 ### Hidden section slides
 
-`hide-section-slides: true` removes the `#` divider slides from the talk. The headings
+By default the `#` divider slides are removed from the talk. The headings
 still group the slides and still appear in the table of contents, so `toc: true` gives
 a single agenda slide instead of a divider before every section. The slide counter
 counts only the slides that are shown. To keep one divider, write
-`# Title {.gatech-show-section}`.
+`# Title {.gatech-show-section}`. To keep all of them, set `hide-section-slides: false`.
 
 ### Per-slide references
 

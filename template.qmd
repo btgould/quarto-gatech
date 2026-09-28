@@ -12,7 +12,6 @@ date-format: "MMMM D, YYYY"
 format:
   gatech-revealjs:
     toc: true                  # agenda slide listing the `#` sections
-    hide-section-slides: true  # skip `#` divider slides; they stay in the TOC
 # bibliography: references.bib # add your own .bib to get per-slide references
 ---
 
@@ -22,7 +21,8 @@ format:
 
 - Level-1 headings (`#`) group slides into sections
 - Level-2 headings (`##`) start a new slide
-- Remove `hide-section-slides` above to show a divider slide for each section
+- `#` divider slides are skipped by default; add `hide-section-slides: false`
+  under the format to show them
 
 ## Related Work
 
