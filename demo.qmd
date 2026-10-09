@@ -1,15 +1,19 @@
 ---
-title: Untitled
+title: GT Theme Demo
+subtitle: Every feature of `gatech-revealjs` on one deck
 format:
   gatech-revealjs: default
-author: Brendan Gould
+author:
+  - name: Brendan Gould
+  - name: Evanns Morales
 date: last-modified
 bibliography: references.bib
 ---
 
-# Section
+# Section {.gatech-show-section}
 
-Test
+Section dividers are hidden by default; `{.gatech-show-section}` keeps this one
+so the section background is visible. `# Styling` below is hidden.
 
 ## Introduction
 
@@ -29,9 +33,7 @@ Test
 Test
 :::
 
-::: {.callout-caution} 
-## Test title
-
+::: {.callout-caution title="Test title"}
 Test
 :::
 
@@ -86,6 +88,49 @@ The transformer architecture has since become foundational in deep learning [@va
 ::: {.fragment}
 Safety filters are commonly built on control barrier functions [@ames2019cbf].
 :::
+
+## Citations and Footnotes
+
+Footnotes and per-slide references share the bottom of the slide.^[A footnote on the same slide as a citation.]
+Channel capacity is a classic result [@shannon1948].
+
+# Styling
+
+## Highlights
+
+::: {.hl-purple}
+`.hl-purple`
+:::
+
+::: {.hl-canopy}
+`.hl-canopy`
+:::
+
+::: {.fragment .hl-blue}
+`.fragment .hl-blue`: the highlight fades in on click
+:::
+
+::: {.fragment .hl-horizon}
+`.fragment .hl-horizon`
+:::
+
+Colors: `purple`, `blue`, `electric`, `canopy`, `buzz`, `horizon`.
+
+## Layout and Quotes
+
+::: {.horiz}
+::: {.hl-electric}
+Left
+:::
+::: {.hl-buzz}
+Center
+:::
+::: {.hl-horizon}
+Right
+:::
+:::
+
+> Blockquotes use Gray Matter text with a Buzz Gold rule.
 
 ## More Information
 

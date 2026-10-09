@@ -1,5 +1,9 @@
 /*-- scss:defaults --*/
 
+// Load Roboto so the deck does not depend on a local install; the fallback
+// stack keeps it sans-serif when presenting offline.
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap");
+
 // <!-- Primary Colors -->
 $tech-gold: #b3a369 !default;
 $navy-blue: #003057 !default;
@@ -56,7 +60,7 @@ $navy-stroke: #171543 !default;
 $pi-mile-stroke: #808080 !default;
 $yellow: #fed76e !default;
 
-$font-family-sans-serif: "Roboto" !default;
+$font-family-sans-serif: "Roboto", "Helvetica Neue", Arial, sans-serif !default;
 
 $body-color: $navy-blue !default;
 
